@@ -5,8 +5,8 @@ exports.createComment = async (req, res, next) => {
 
   try {
     const user = await User.findOne({ where: { uuid: userUuid } });
-    const post = await User.findOne({ where: { uuid: postUuid } });
-
+    const post = await Post.findOne({ where: { uuid: postUuid } });
+    console.log(post);
     const comment = await Comment.create({ body, userId: user.id, postId: post.id });
 
     return res.json(comment);
@@ -17,9 +17,9 @@ exports.createComment = async (req, res, next) => {
 };
 exports.getAllComments = async (req, res, next) => {
   try {
-    const posts = await Post.findAll();
+    const comments = await Comment.findAll();
 
-    return res.json(posts);
+    return res.json(comments);
   } catch (err) {
     console.error(err);
     return res.status(500).json({ error: "Something went wrong!" });
@@ -28,12 +28,12 @@ exports.getAllComments = async (req, res, next) => {
 exports.getOneComment = async (req, res, next) => {
   const uuid = req.params.uuid;
   try {
-    const post = await Post.findOne({
+    const comment = await Comment.findOne({
       where: { uuid },
-      include: "user",
+      include: "post",
     });
 
-    return res.json(post);
+    return res.json(comment);
   } catch (err) {
     console.log(err);
     return res.status(500).json({ error: "Something went wrong!" });
@@ -43,9 +43,9 @@ exports.getOneComment = async (req, res, next) => {
 exports.deleteComment = async (req, res, next) => {
   const uuid = req.params.uuid;
   try {
-    const post = await Post.findOne({ where: { uuid } });
+    const comment = await Comment.findOne({ where: { uuid } });
 
-    await post.destroy();
+    await comment.destroy();
 
     return res.json({ message: "post effacé !" });
   } catch (err) {
