@@ -5,8 +5,8 @@ const fs = require("fs");
 const { sequelize, User } = require("../models");
 
 exports.signup = async (req, res) => {
-  const { firstName, lastName, email, password, description, photo, isAdmin } = req.body;
-
+  const { firstName, lastName, email, password, description, photo } = req.body;
+  const isAdmin = false;
   try {
     const user = await User.create({ firstName, lastName, email, password, description, photo, isAdmin });
 
@@ -32,7 +32,7 @@ exports.login = async (req, res) => {
           res.status(200).json({
             message: "Utilisateur connecté !",
             userUuid: user.uuid,
-            token: jwt.sign({ userUuid: user.uuid }, "RANDOM_TOKEN_SECRET", { expiresIn: "24h" }),
+            accessToken: jwt.sign({ userUuid: user.uuid }, "RANDOM_TOKEN_SECRET", { expiresIn: "24h" }),
           });
         })
         .catch((err) => res.status(500).json({ err }));

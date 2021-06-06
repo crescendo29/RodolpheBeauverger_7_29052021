@@ -3,7 +3,8 @@ import GlobalStyle from "./styles/GlobalStyle";
 import { Switch, Route } from "react-router-dom";
 import "./styles/App.css";
 import Home from "./pages/Home";
-import Profile from "./pages/Profile";
+import DashBoard from "./pages/DashBoard";
+import Signup from "./pages/Signup";
 
 const App = () => {
   return (
@@ -13,8 +14,11 @@ const App = () => {
         <Route path="/" exact>
           <Home />
         </Route>
-        <Route path="/profile">
-          <Profile />
+        <Route path="/dashboard">
+          <DashBoard />
+        </Route>
+        <Route path="/signup">
+          <Signup />
         </Route>
       </Switch>
     </div>

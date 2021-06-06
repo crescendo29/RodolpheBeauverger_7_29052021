@@ -7,6 +7,8 @@ import AuthService from "../services/auth.service";
 import { Link, Redirect } from "react-router-dom";
 
 const schema = yup.object().shape({
+  firstName: yup.string().required("Veuillez indiquer votre Prénom."),
+  lastName: yup.string().required("Veuillez indiquer votre Nom."),
   email: yup.string().email().required("Veuillez indiquer votre Email."),
   password: yup
     .string()
@@ -17,7 +19,7 @@ const schema = yup.object().shape({
     ),
 });
 
-const Login = () => {
+const Register = () => {
   const [islogged, setIslogged] = useState(false);
 
   const {
@@ -30,11 +32,11 @@ const Login = () => {
   });
 
   const onSubmit = (data) => {
-    AuthService.login(data.email, data.password)
+    AuthService.register(data.firstName, data.lastName, data.email, data.password)
       .then(() => setIslogged(true))
       .catch((error) => {
         console.log(error);
-        alert("Email ou Password incorrects");
+        alert("Quelque choose s'est mal passé.");
       });
   };
 
@@ -43,24 +45,30 @@ const Login = () => {
       <img src={background} alt="Logo" className="Logo" />
       <div className="HomeNav">
         <h1>Groupomania</h1>
-        <Link className="register" to="/signup">
-          S'inscrire
+        <Link className="register" to="/">
+          Se connecter
         </Link>
       </div>
       <div className="Loginform">
         <form onSubmit={handleSubmit(onSubmit)}>
-          <input {...register("email")} placeholder="Email" />
+          <input {...register("firstName")} placeholder="Votre Prénom." />
+          <p>{errors.firstName?.message}</p>
+
+          <input {...register("lastName")} placeholder="Votre Nom." />
+          <p>{errors.lastName?.message}</p>
+
+          <input {...register("email")} placeholder="Votre Email." />
           <p>{errors.email?.message}</p>
 
-          <input {...register("password")} placeholder="Mot de passe" />
+          <input {...register("password")} placeholder="Votre Mot de passe." />
           <p>{errors.password?.message}</p>
 
-          <button type="submit">Entrer</button>
-          {islogged && <Redirect to="/dashboard" />}
+          <button type="submit">S'inscrire</button>
+          {islogged && <Redirect to="/" />}
         </form>
       </div>
     </div>
   );
 };
 
-export default Login;
+export default Register;
