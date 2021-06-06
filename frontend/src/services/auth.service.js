@@ -35,7 +35,7 @@ const getCurrentUser = () => {
   console.log(user);
   return axios.get(API_URL + `${user.userUuid}`).then((response) => {
     localStorage.setItem("userInfo", JSON.stringify(response.data));
-    console.log(response.data);
+    console.log(response);
     return response.data;
   });
 };

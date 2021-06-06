@@ -8,7 +8,7 @@ const Profile = () => {
   useEffect(() => {
     AuthService.getCurrentUser().then(
       (response) => {
-        setContent(response.data);
+        setContent(response);
       },
       (error) => {
         const _content = (error.response && error.response.data && error.response.data.message) || error.message || error.toString();
@@ -20,7 +20,7 @@ const Profile = () => {
 
   return (
     <div>
-      <h1>Bienvenue {content}</h1>
+      <h1>Bienvenue {content.firstName.toUpperCase()} !</h1>
     </div>
   );
 };
