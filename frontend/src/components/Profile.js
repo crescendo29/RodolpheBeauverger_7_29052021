@@ -1,11 +1,28 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import AuthService from "../services/auth.service";
 import { Link, Redirect } from "react-router-dom";
 
 const Profile = () => {
-  //const currentUser = AuthService.getCurrentUser();
+  const [content, setContent] = useState("");
 
-  return <div>Bienvenue</div>;
+  useEffect(() => {
+    AuthService.getCurrentUser().then(
+      (response) => {
+        setContent(response.data);
+      },
+      (error) => {
+        const _content = (error.response && error.response.data && error.response.data.message) || error.message || error.toString();
+
+        setContent(_content);
+      }
+    );
+  }, []);
+
+  return (
+    <div>
+      <h1>Bienvenue {content}</h1>
+    </div>
+  );
 };
 
 export default Profile;

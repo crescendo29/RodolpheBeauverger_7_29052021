@@ -31,7 +31,13 @@ const logout = () => {
 };
 
 const getCurrentUser = () => {
-  return JSON.parse(localStorage.getItem("user"));
+  const user = JSON.parse(localStorage.getItem("user"));
+  console.log(user);
+  return axios.get(API_URL + `${user.userUuid}`).then((response) => {
+    localStorage.setItem("userInfo", JSON.stringify(response.data));
+    console.log(response.data);
+    return response.data;
+  });
 };
 
 export default {
