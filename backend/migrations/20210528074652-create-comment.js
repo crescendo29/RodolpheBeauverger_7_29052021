@@ -24,6 +24,14 @@ module.exports = {
         type: DataTypes.INTEGER,
         allowNull: false,
       },
+      userFirstName: {
+        allownull: false,
+        type: DataTypes.STRING,
+      },
+      userLastName: {
+        allownull: false,
+        type: DataTypes.STRING,
+      },
       createdAt: {
         allowNull: false,
         type: DataTypes.DATE,

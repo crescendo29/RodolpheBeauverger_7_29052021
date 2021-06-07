@@ -6,8 +6,8 @@ exports.createPost = async (req, res, next) => {
 
   try {
     const user = await User.findOne({ where: { uuid: userUuid } });
-
-    const post = await Post.create({ body, content, userId: user.id });
+    console.log(user);
+    const post = await Post.create({ body, content, userId: user.id, userFirstName: user.firstName, userLastName: user.lastName });
 
     return res.json(post);
   } catch (err) {
@@ -17,7 +17,7 @@ exports.createPost = async (req, res, next) => {
 };
 exports.getAllPosts = async (req, res, next) => {
   try {
-    const posts = await Post.findAll({ include: "comments" });
+    const posts = await Post.findAll({ include: ["comments", "user"] });
 
     return res.json(posts);
   } catch (err) {

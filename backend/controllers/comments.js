@@ -7,7 +7,7 @@ exports.createComment = async (req, res, next) => {
     const user = await User.findOne({ where: { uuid: userUuid } });
     const post = await Post.findOne({ where: { uuid: postUuid } });
     console.log(post);
-    const comment = await Comment.create({ comm, userId: user.id, postId: post.id });
+    const comment = await Comment.create({ comm, userId: user.id, postId: post.id, userFirstName: user.firstName, userLastName: user.lastName });
 
     return res.json(comment);
   } catch (err) {
@@ -17,7 +17,7 @@ exports.createComment = async (req, res, next) => {
 };
 exports.getAllComments = async (req, res, next) => {
   try {
-    const comments = await Comment.findAll({});
+    const comments = await Comment.findAll({ include: "user" });
 
     return res.json(comments);
   } catch (err) {
