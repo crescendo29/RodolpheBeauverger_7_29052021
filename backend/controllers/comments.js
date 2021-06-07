@@ -17,7 +17,11 @@ exports.createComment = async (req, res, next) => {
 };
 exports.getAllComments = async (req, res, next) => {
   try {
-    const comments = await Comment.findAll();
+    const comments = await Comment.findAll({
+      /* where: {
+        postId: req.body.postId,
+      }, */
+    });
 
     return res.json(comments);
   } catch (err) {

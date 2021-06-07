@@ -25,9 +25,9 @@ button{
     font-size: 1.1.rem;
     cursor: pointer;
     padding: 1rem 2rem;
-    border: 3px solid #23d997;
-    background: transparent;
-    color: white;
+    border: 3px solid #0d99d7;
+    background: #fcddd8;
+    color: black;
     transition: all 0.5s ease;
     font-family: 'Inter', sans-serif;
     &:hover{
