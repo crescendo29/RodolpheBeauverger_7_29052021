@@ -17,7 +17,7 @@ exports.createPost = async (req, res, next) => {
 };
 exports.getAllPosts = async (req, res, next) => {
   try {
-    const posts = await Post.findAll();
+    const posts = await Post.findAll({ include: "comments" });
 
     return res.json(posts);
   } catch (err) {

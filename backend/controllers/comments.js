@@ -1,13 +1,13 @@
 const { sequelize, User, Post, Comment } = require("../models");
 
 exports.createComment = async (req, res, next) => {
-  const { userUuid, postUuid, body } = req.body;
+  const { userUuid, postUuid, comm } = req.body;
 
   try {
     const user = await User.findOne({ where: { uuid: userUuid } });
     const post = await Post.findOne({ where: { uuid: postUuid } });
     console.log(post);
-    const comment = await Comment.create({ body, userId: user.id, postId: post.id });
+    const comment = await Comment.create({ comm, userId: user.id, postId: post.id });
 
     return res.json(comment);
   } catch (err) {
@@ -17,11 +17,7 @@ exports.createComment = async (req, res, next) => {
 };
 exports.getAllComments = async (req, res, next) => {
   try {
-    const comments = await Comment.findAll({
-      /* where: {
-        postId: req.body.postId,
-      }, */
-    });
+    const comments = await Comment.findAll({});
 
     return res.json(comments);
   } catch (err) {

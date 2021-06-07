@@ -15,7 +15,7 @@ module.exports = (sequelize, DataTypes) => {
         type: DataTypes.UUID,
         defaultValue: DataTypes.UUIDV4,
       },
-      body: {
+      comm: {
         type: DataTypes.TEXT,
         allowNull: true,
       },

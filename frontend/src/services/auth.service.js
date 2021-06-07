@@ -32,10 +32,8 @@ const logout = () => {
 
 const getCurrentUser = async () => {
   const user = JSON.parse(localStorage.getItem("user"));
-  console.log(user);
   const response = await axios.get(API_URL + `${user.userUuid}`);
   localStorage.setItem("userInfo", JSON.stringify(response.data));
-  console.log(response);
   return response.data;
 };
 

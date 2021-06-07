@@ -1,13 +1,11 @@
 import React, { useState, useEffect } from "react";
 import AuthService from "../services/auth.service";
 import Posts from "../services/posts";
-import Comments from "../services/comments";
 import { Link, Redirect } from "react-router-dom";
 
 const Profile = () => {
   const [content, setContent] = useState("");
   const [posts, setPosts] = useState([]);
-  const [comments, setComments] = useState([]);
 
   useEffect(() => {
     AuthService.getCurrentUser().then(
@@ -35,20 +33,7 @@ const Profile = () => {
       }
     );
   }, []);
-  useEffect(() => {
-    Comments.getComments().then(
-      (response) => {
-        setComments(response.data);
-        console.log(response.data);
-      },
-      (error) => {
-        const _comments = (error.response && error.response.data && error.response.data.message) || error.message || error.toString();
 
-        setComments(_comments);
-      }
-    );
-  }, []);
-  console.log(posts);
   return (
     <div>
       <h1>Bienvenue {content.firstName} !</h1>
@@ -58,7 +43,11 @@ const Profile = () => {
         {posts.map((post) => (
           <li key={post.id}>
             {post.body}
-            {/* <ul className="contents">{comments.filter((postId) => postId === post.id(<li key={comments.id}>{comments.body}</li>))}</ul> */}
+            <ul className="contents">
+              {post.comments.map((comment) => (
+                <li key={comment.id}>{comment.comm}</li>
+              ))}
+            </ul>
           </li>
         ))}
       </ul>
