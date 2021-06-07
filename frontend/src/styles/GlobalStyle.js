@@ -1,40 +1,41 @@
-import {createGlobalStyle} from 'styled-components'
+import { createGlobalStyle } from "styled-components";
+import background from "../images/icon.svg";
 
 const GlobalStyle = createGlobalStyle`
 
 *{
     margin: 0;
     padding: 0;
-    box-sizing: border-box;
+    box-sizing: border-box
+}
+
+html{
+    @media (max-width: 1700px){
+        font-size: 75%;
+    }
+    
 }
 
 body{
-    
-    font-family: 'Inter', sans-serif;
+    font-family: 'Montserrat', sans-serif;
+    overflow-x: hidden;
 }
-.App{
-    width: 100%;
-    height: 100vh;
-    display: flex;
-}
-
 button{
     font-weight: bold;
-    font-size: 1.1 rem;
+    font-size: 1.1.rem;
     cursor: pointer;
     padding: 1rem 2rem;
     border: 3px solid #23d997;
     background: transparent;
     color: white;
-    transition: all 0.5s ease-in-out;
+    transition: all 0.5s ease;
     font-family: 'Inter', sans-serif;
     &:hover{
         background-color: #23d997;
         color: white;
     }
-    
 }
-h2{
+    h2{
         font-weight: lighter;
         font-size: 4rem;
     }
@@ -47,11 +48,11 @@ h2{
        
     }
     a{
-        font-size: 1.1 rem;
+        font-size: 1.1rem;
     }
     span{
         font-weight: bold;
-        color: #23d997;
+        color:#23d997;
     }
     p{
         padding: 3rem 0rem;
@@ -59,8 +60,7 @@ h2{
         font-size: 1.4rem;
         line-height: 150%;
     }
-`
 
+`;
 
-
-export default GlobalStyle
+export default GlobalStyle;

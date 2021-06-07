@@ -20,7 +20,7 @@ const Profile = () => {
 
   return (
     <div>
-      <h1>Bienvenue {content.firstName.toUpperCase()} !</h1>
+      <h1>Bienvenue {content.firstName} !</h1>
     </div>
   );
 };

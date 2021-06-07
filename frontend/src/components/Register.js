@@ -5,6 +5,7 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 import AuthService from "../services/auth.service";
 import { Link, Redirect } from "react-router-dom";
+import { GroupoForm } from "../styles/Form";
 
 const schema = yup.object().shape({
   firstName: yup.string().required("Veuillez indiquer votre Prénom."),
@@ -41,33 +42,33 @@ const Register = () => {
   };
 
   return (
-    <div className="HomePage">
-      <img src={background} alt="Logo" className="Logo" />
-      <div className="HomeNav">
-        <h1>Groupomania</h1>
-        <Link className="register" to="/">
-          Se connecter
-        </Link>
-      </div>
-      <div className="Loginform">
+    <GroupoForm>
+      <div className="inner">
         <form onSubmit={handleSubmit(onSubmit)}>
-          <input {...register("firstName")} placeholder="Votre Prénom." />
-          <p>{errors.firstName?.message}</p>
+          <label htmlFor="firstName" className="form-group">
+            <input {...register("firstName")} id="firstName" placeholder="Votre Prénom." className="form-control" />
 
-          <input {...register("lastName")} placeholder="Votre Nom." />
-          <p>{errors.lastName?.message}</p>
+            <p>{errors.firstName?.message}</p>
+          </label>
+          <label htmlFor="lastName" className="form-group">
+            <input {...register("lastName")} id="lastName" placeholder="Votre Nom." className="form-control" />
+            <p>{errors.lastName?.message}</p>
+          </label>
 
-          <input {...register("email")} placeholder="Votre Email." />
-          <p>{errors.email?.message}</p>
+          <label htmlFor="email" className="form-group">
+            <input {...register("email")} id="email" placeholder="Votre Email." className="form-control" />
+            <p>{errors.email?.message}</p>
+          </label>
+          <label htmlFor="password" className="form-group">
+            <input {...register("password")} id="password" placeholder="Votre Mot de passe." className="form-control" />
+            <p>{errors.password?.message}</p>
+          </label>
 
-          <input {...register("password")} placeholder="Votre Mot de passe." />
-          <p>{errors.password?.message}</p>
-
-          <button type="submit">S'inscrire</button>
+          <button type="submit">inscription</button>
           {islogged && <Redirect to="/" />}
         </form>
       </div>
-    </div>
+    </GroupoForm>
   );
 };
 

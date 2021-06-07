@@ -1,10 +1,10 @@
 import React, { useState } from "react";
-import background from "../images/icon.svg";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 import AuthService from "../services/auth.service";
 import { Link, Redirect } from "react-router-dom";
+import { GroupoForm } from "../styles/Form";
 
 const schema = yup.object().shape({
   email: yup.string().email().required("Veuillez indiquer votre Email."),
@@ -39,27 +39,24 @@ const Login = () => {
   };
 
   return (
-    <div className="HomePage">
-      <img src={background} alt="Logo" className="Logo" />
-      <div className="HomeNav">
-        <h1>Groupomania</h1>
-        <Link className="register" to="/signup">
-          S'inscrire
-        </Link>
-      </div>
-      <div className="Loginform">
+    <GroupoForm>
+      <div className="inner">
         <form onSubmit={handleSubmit(onSubmit)}>
-          <input {...register("email")} placeholder="Email" />
-          <p>{errors.email?.message}</p>
+          <label htmlFor="email" className="form-group">
+            <input {...register("email")} id="email" placeholder="Email" className="form-control" />
+            <p>{errors.email?.message}</p>
+          </label>
 
-          <input {...register("password")} placeholder="Mot de passe" />
-          <p>{errors.password?.message}</p>
+          <label htmlFor="email" className="form-group">
+            <input {...register("password")} id="password" placeholder="Mot de passe" className="form-control" />
+            <p>{errors.password?.message}</p>
+          </label>
 
           <button type="submit">Entrer</button>
           {islogged && <Redirect to="/dashboard" />}
         </form>
       </div>
-    </div>
+    </GroupoForm>
   );
 };
 
