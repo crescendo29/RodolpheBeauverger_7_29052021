@@ -1,9 +1,11 @@
 import React, { useState, useEffect } from "react";
 import AuthService from "../services/auth.service";
+import Posts from "../services/posts";
 import { Link, Redirect } from "react-router-dom";
 
 const Profile = () => {
   const [content, setContent] = useState("");
+  const [posts, setPosts] = useState("");
 
   useEffect(() => {
     AuthService.getCurrentUser().then(
@@ -18,9 +20,30 @@ const Profile = () => {
     );
   }, []);
 
+  useEffect(() => {
+    Posts.getPosts().then(
+      (response) => {
+        setPosts(response.data);
+        console.log(response.data);
+      },
+      (error) => {
+        const _content = (error.response && error.response.data && error.response.data.message) || error.message || error.toString();
+
+        setContent(_content);
+      }
+    );
+  }, []);
+
   return (
     <div>
       <h1>Bienvenue {content.firstName} !</h1>
+      <button>Modifier votre Profil </button>
+      <button>Créer une Publication</button>
+      <ul className="posts">
+        {/*  {posts.map((post) => {
+          <li key={post.uuid}>{post.body} </li>;
+        })} */}
+      </ul>
     </div>
   );
 };

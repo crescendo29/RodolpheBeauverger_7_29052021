@@ -30,14 +30,13 @@ const logout = () => {
   localStorage.removeItem("user");
 };
 
-const getCurrentUser = () => {
+const getCurrentUser = async () => {
   const user = JSON.parse(localStorage.getItem("user"));
   console.log(user);
-  return axios.get(API_URL + `${user.userUuid}`).then((response) => {
-    localStorage.setItem("userInfo", JSON.stringify(response.data));
-    console.log(response);
-    return response.data;
-  });
+  const response = await axios.get(API_URL + `${user.userUuid}`);
+  localStorage.setItem("userInfo", JSON.stringify(response.data));
+  console.log(response);
+  return response.data;
 };
 
 export default {
