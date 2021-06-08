@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
@@ -31,7 +31,9 @@ const Login = () => {
 
   const onSubmit = (data) => {
     AuthService.login(data.email, data.password)
-      .then(() => setIslogged(true))
+      .then(() => {
+        setIslogged(true);
+      })
       .catch((error) => {
         console.log(error);
         alert("Email ou Password incorrects");

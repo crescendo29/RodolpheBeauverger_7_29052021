@@ -3,7 +3,7 @@ const { sequelize, User, Post } = require("../models");
 
 exports.createPost = async (req, res, next) => {
   const { userUuid, body, content } = req.body;
-
+  console.log(req.body.userUuid);
   try {
     const user = await User.findOne({ where: { uuid: userUuid } });
     console.log(user);

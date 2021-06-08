@@ -1,4 +1,5 @@
 import axios from "axios";
+import authHeader from "./auth-header";
 
 const API_URL = "http://localhost:3000/api/user/";
 
@@ -28,11 +29,12 @@ const login = (email, password) => {
 
 const logout = () => {
   localStorage.removeItem("user");
+  localStorage.removeItem("userInfo");
 };
 
 const getCurrentUser = async () => {
   const user = JSON.parse(localStorage.getItem("user"));
-  const response = await axios.get(API_URL + `${user.userUuid}`);
+  const response = await axios.get(API_URL + `${user.userUuid}`, { headers: authHeader() });
   localStorage.setItem("userInfo", JSON.stringify(response.data));
   return response.data;
 };

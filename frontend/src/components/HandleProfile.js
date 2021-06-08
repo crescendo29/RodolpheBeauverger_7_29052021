@@ -1,10 +1,10 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
-import AuthService from "../services/auth.service";
 import { Link, Redirect } from "react-router-dom";
 import { GroupoForm } from "../styles/Form";
+import UserService from "../services/user.service";
 
 const schema = yup.object().shape({
   firstName: yup.string().required("Veuillez indiquer votre Prénom."),
@@ -19,8 +19,8 @@ const schema = yup.object().shape({
     ),
 });
 
-const Register = () => {
-  const [isregistered, setIsregistered] = useState(false);
+const ManageProfile = () => {
+  const [isUpdated, setIsUpdated] = useState(false);
 
   const {
     register,
@@ -32,43 +32,48 @@ const Register = () => {
   });
 
   const onSubmit = (data) => {
-    AuthService.register(data.firstName, data.lastName, data.email, data.password)
-      .then(() => setIsregistered(true))
+    UserService.updateUser(data.firstName, data.lastName, data.email, data.password)
+      .then(() => setIsUpdated(true))
       .catch((error) => {
         console.log(error);
         alert("Quelque choose s'est mal passé.");
       });
   };
 
+  const user = JSON.parse(localStorage.getItem("userInfo"));
+
   return (
     <GroupoForm>
       <div className="inner">
         <form onSubmit={handleSubmit(onSubmit)}>
           <label htmlFor="firstName" className="form-group">
-            <input {...register("firstName")} id="firstName" placeholder="Votre Prénom." className="form-control" />
-
+            <input {...register("firstName")} id="firstName" className="form-control" />
+            {user.firstName}
             <p>{errors.firstName?.message}</p>
           </label>
           <label htmlFor="lastName" className="form-group">
             <input {...register("lastName")} id="lastName" placeholder="Votre Nom." className="form-control" />
+            {user.lastName}
             <p>{errors.lastName?.message}</p>
           </label>
 
           <label htmlFor="email" className="form-group">
             <input {...register("email")} id="email" placeholder="Votre Email." className="form-control" />
+            {user.email}
             <p>{errors.email?.message}</p>
           </label>
           <label htmlFor="password" className="form-group">
             <input {...register("password")} id="password" placeholder="Votre Mot de passe." className="form-control" />
+            {user.password}
             <p>{errors.password?.message}</p>
           </label>
 
-          <button type="submit">inscription</button>
-          {isregistered && <Redirect to="/" />}
+          <button type="submit">Mettre à jour</button>
+          {isUpdated && <Redirect to="/dashboard" />}
         </form>
       </div>
     </GroupoForm>
   );
 };
 
-export default Register;
+export default ManageProfile;

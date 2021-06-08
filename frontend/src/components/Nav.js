@@ -1,8 +1,13 @@
 import React from "react";
-import styled from "styled-components";
 import { Link } from "react-router-dom";
 import StyledNav from "../styles/StyledNav";
+import AuthService from "../services/auth.service";
+
 const Nav = () => {
+  const logOut = () => {
+    AuthService.logout();
+  };
+
   return (
     <StyledNav>
       <h1>
@@ -16,7 +21,9 @@ const Nav = () => {
           <Link to="/signup">Inscription</Link>
         </li>
         <li>
-          <Link to="/post">Déconnexion</Link>
+          <Link to="/" onClick={logOut}>
+            Déconnexion
+          </Link>
         </li>
       </ul>
     </StyledNav>

@@ -7,6 +7,10 @@ const getPosts = () => {
   return axios.get(API_URL, { headers: authHeader() });
 };
 
+const createPost = (body, content, userUuid) => {
+  return axios.post(API_URL, { headers: authHeader() });
+};
+
 export default {
   getPosts,
 };

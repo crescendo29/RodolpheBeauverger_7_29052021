@@ -37,11 +37,14 @@ const Profile = () => {
   return (
     <div>
       <h1>Bienvenue {content.firstName} !</h1>
-      <button>Modifier votre Profil </button>
-      <button>Créer une Publication</button>
+      <Link to="/manageprofile">Modifier votre Profil</Link>
+      <Link to="/createpost">Créer une Publication</Link>
       <ul className="posts">
         {posts.map((post) => (
           <li key={post.id}>
+            <h2>
+              {post.user.firstName} {post.user.lastName} {post.createdAt}
+            </h2>
             {post.body}
             <ul className="contents">
               {post.comments.map((comment) => (

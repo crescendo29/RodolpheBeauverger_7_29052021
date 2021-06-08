@@ -24,11 +24,11 @@ module.exports = {
         type: DataTypes.INTEGER,
         allowNull: false,
       },
-      userFirstName: {
+      commentFirstName: {
         allownull: false,
         type: DataTypes.STRING,
       },
-      userLastName: {
+      commentLastName: {
         allownull: false,
         type: DataTypes.STRING,
       },

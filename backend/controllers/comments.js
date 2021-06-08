@@ -6,8 +6,8 @@ exports.createComment = async (req, res, next) => {
   try {
     const user = await User.findOne({ where: { uuid: userUuid } });
     const post = await Post.findOne({ where: { uuid: postUuid } });
-    console.log(post);
-    const comment = await Comment.create({ comm, userId: user.id, postId: post.id, userFirstName: user.firstName, userLastName: user.lastName });
+    console.log(user.firstName);
+    const comment = await Comment.create({ comm, userId: user.id, postId: post.id, commentFirstName: user.firstName, commentLastName: user.lastName });
 
     return res.json(comment);
   } catch (err) {
