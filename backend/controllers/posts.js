@@ -2,8 +2,9 @@ const fs = require("fs");
 const { sequelize, User, Post } = require("../models");
 
 exports.createPost = async (req, res, next) => {
-  const { userUuid, body, content } = req.body;
-  console.log(req.body.userUuid);
+  const { body, userUuid } = req.body;
+  const content = req.file ? `${req.protocol}://${req.get("host")}/images/${req.file.filename}` : "";
+
   try {
     const user = await User.findOne({ where: { uuid: userUuid } });
     console.log(user);

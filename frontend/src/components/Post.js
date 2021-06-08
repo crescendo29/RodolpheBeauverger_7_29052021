@@ -18,6 +18,12 @@ const Post = () => {
 
   const onSubmit = (data) => {
     console.log(data);
+    PostsService.createPost(data.body, data.content)
+      .then(() => setIsCreated(true))
+      .catch((errors) => {
+        console.log(errors);
+        alert("Quelque choose s'est mal passé.");
+      });
   };
 
   return (
@@ -28,9 +34,8 @@ const Post = () => {
             <input {...register("body")} id="body" placeholder="Votre contenu" className="form-control" />
           </label>
           <label htmlFor="content" className="form-group">
-            <input {...register("content")} id="content" className="form-control" />
+            <input {...register("content")} type="file" id="content" className="form-control" />
           </label>
-
           <button type="submit">Publier</button>
           {isCreated && <Redirect to="/dashboard" />}
         </form>
