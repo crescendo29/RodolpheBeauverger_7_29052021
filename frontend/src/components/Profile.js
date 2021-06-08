@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import AuthService from "../services/auth.service";
-import Posts from "../services/posts";
+import PostsService from "../services/posts-service";
 import { Link, Redirect } from "react-router-dom";
 
 const Profile = () => {
@@ -21,7 +21,7 @@ const Profile = () => {
   }, []);
 
   useEffect(() => {
-    Posts.getPosts().then(
+    PostsService.getPosts().then(
       (response) => {
         setPosts(response.data);
         console.log(response.data);
@@ -37,8 +37,6 @@ const Profile = () => {
   return (
     <div>
       <h1>Bienvenue {content.firstName} !</h1>
-      <Link to="/manageprofile">Modifier votre Profil</Link>
-      <Link to="/createpost">Créer une Publication</Link>
       <ul className="posts">
         {posts.map((post) => (
           <li key={post.id}>

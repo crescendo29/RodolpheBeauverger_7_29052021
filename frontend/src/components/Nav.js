@@ -18,8 +18,18 @@ const Nav = () => {
           <Link to="/">Connexion</Link>
         </li>
         <li>
+          <Link to="/manageprofile">Modifier votre Profil</Link>
+        </li>
+        <li>
+          <Link to="/dashboard">Consulter les Posts</Link>
+        </li>
+        <li>
+          <Link to="/createpost">Créer une Publication</Link>
+        </li>
+        <li>
           <Link to="/signup">Inscription</Link>
         </li>
+
         <li>
           <Link to="/" onClick={logOut}>
             Déconnexion
