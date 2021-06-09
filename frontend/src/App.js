@@ -29,6 +29,9 @@ const App = () => {
         <Route path="/createpost">
           <CreatePost />
         </Route>
+        <Route path="/handlePost/?uuid=">
+          <CreatePost />
+        </Route>
       </Switch>
     </div>
   );

@@ -19,7 +19,12 @@ const createPost = (body, content, userUuid) => {
   );
 };
 
+const getPost = (uuid) => {
+  return axios.get(API_URL, { params: { uuid: URLSearchParams.get(uuid) } }, { headers: authHeader() });
+};
+
 export default {
   getPosts,
   createPost,
+  getPost,
 };

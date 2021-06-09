@@ -3,16 +3,10 @@ import AuthService from "../services/auth.service";
 import PostsService from "../services/posts-service";
 import Card from "../styles/Post";
 import { Link, Redirect } from "react-router-dom";
-import Comment from "./Comments";
+
 const Profile = () => {
   const [content, setContent] = useState("");
   const [posts, setPosts] = useState([]);
-  const [comments, setComments] = useState([]);
-  const [createComment, setCreateComment] = useState(false);
-
-  const openComment = () => {
-    setCreateComment(true);
-  };
 
   useEffect(() => {
     AuthService.getCurrentUser().then(
@@ -48,19 +42,20 @@ const Profile = () => {
       <Card className="card">
         <ul className="posts">
           {posts.map((post) => (
-            <li key={post.id} onClick={(post) => openComment(post)}>
-              <h4>
-                {post.user.firstName} {post.user.lastName}
-              </h4>
-              <span>{post.createdAt}</span>
-              <p>{post.body}</p>
-              <img src={post.content} alt="illustration du post" />
-              <ul className="contents">
-                {post.comments.map((comment) => (
-                  <li key={comment.id}>{comment.comm}</li>
-                ))}
-              </ul>
-              {createComment && <Comment />}
+            <li key={post.id}>
+              <Link to={`/handlepost/?uuid=${post.uuid}`} className="post-card">
+                <h4>
+                  {post.user.firstName} {post.user.lastName}
+                </h4>
+                <span>{post.createdAt}</span>
+                <p>{post.body}</p>
+                <img src={post.content} alt="illustration du post" />
+                <ul className="contents">
+                  {post.comments.map((comment) => (
+                    <li key={comment.id}>{comment.comm}</li>
+                  ))}
+                </ul>
+              </Link>
             </li>
           ))}
         </ul>

@@ -8,7 +8,7 @@ const Card = styled.div`
   ul {
     width: 50%;
     list-style: none;
-    li {
+    .post-card {
       display: flex;
       flex-direction: column;
       align-items: center;
