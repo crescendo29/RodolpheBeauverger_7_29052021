@@ -7,6 +7,7 @@ import Signup from "./pages/Signup";
 import ManageProfile from "./pages/ManageProfile";
 import CreatePost from "./pages/CreatePost";
 import Nav from "./components/Nav";
+
 const App = () => {
   return (
     <div className="App">

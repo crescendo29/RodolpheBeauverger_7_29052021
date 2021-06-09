@@ -15,19 +15,19 @@ const StyledNav = styled.nav`
     color: white;
     text-decoration: none;
   }
+
   ul {
     display: flex;
     list-style: none;
   }
-  #logo {
-    font-size: 1.5rem;
-    font-family: "Lobster", cursive;
-    font-weight: lighter;
-  }
   li {
     padding-left: 10rem;
     position: relative;
+    &:hover {
+      font-weight: bold;
+    }
   }
+
   @media (max-width: 1300px) {
     flex-direction: column;
     padding: 2rem 1rem;

@@ -4,10 +4,8 @@ const { sequelize, User, Post } = require("../models");
 exports.createPost = async (req, res, next) => {
   const { body, userUuid } = req.body;
   const content = req.file ? `${req.protocol}://${req.get("host")}/images/${req.file.filename}` : "";
-
   try {
     const user = await User.findOne({ where: { uuid: userUuid } });
-    console.log(user);
     const post = await Post.create({ body, content, userId: user.id, userFirstName: user.firstName, userLastName: user.lastName });
 
     return res.json(post);
@@ -18,7 +16,7 @@ exports.createPost = async (req, res, next) => {
 };
 exports.getAllPosts = async (req, res, next) => {
   try {
-    const posts = await Post.findAll({ include: ["comments", "user"] });
+    const posts = await Post.findAll({ order: [["createdAt", "DESC"]], include: ["comments", "user"] });
 
     return res.json(posts);
   } catch (err) {

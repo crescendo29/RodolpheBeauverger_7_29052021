@@ -1,5 +1,4 @@
 import styled from "styled-components";
-import icon from "../images/icon.svg";
 
 export const GroupoForm = styled.div`
   min-height: 100vh;

@@ -17,8 +17,8 @@ const Post = () => {
   });
 
   const onSubmit = (data) => {
-    console.log(data);
-    PostsService.createPost(data.body, data.content)
+    const user = JSON.parse(localStorage.getItem("user"));
+    PostsService.createPost(data.body, data.content, user.userUuid)
       .then(() => setIsCreated(true))
       .catch((errors) => {
         console.log(errors);
