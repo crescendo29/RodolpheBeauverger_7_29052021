@@ -48,7 +48,7 @@ const Profile = () => {
       <Card className="card">
         <ul className="posts">
           {posts.map((post) => (
-            <li key={post.id} onClick={() => openComment()}>
+            <li key={post.id} onClick={(post) => openComment(post)}>
               <h4>
                 {post.user.firstName} {post.user.lastName}
               </h4>
