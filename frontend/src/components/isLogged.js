@@ -3,6 +3,6 @@ import { useTate } from "react";
 import { Link, Redirect } from "react-router-dom";
 import AuthService from "../services/auth.service";
 
-function CheckLog() {}
+function isLogged() {}
 
-export default CheckLog;
+export default isLogged;

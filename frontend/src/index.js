@@ -3,6 +3,10 @@ import ReactDOM from "react-dom";
 import App from "./App";
 import reportWebVitals from "./reportWebVitals";
 import { BrowserRouter } from "react-router-dom";
+import TimeAgo from "javascript-time-ago";
+import fr from "javascript-time-ago/locale/fr";
+
+TimeAgo.addLocale(fr);
 
 ReactDOM.render(
   <React.StrictMode>

@@ -3,6 +3,7 @@ import AuthService from "../services/auth.service";
 import PostsService from "../services/posts-service";
 import Card from "../styles/Post";
 import { Link, Redirect } from "react-router-dom";
+import ReactTimeAgo from "react-time-ago";
 
 const Profile = () => {
   const [content, setContent] = useState("");
@@ -47,7 +48,7 @@ const Profile = () => {
                 <h4>
                   {post.user.firstName} {post.user.lastName}
                 </h4>
-                <span>{post.createdAt}</span>
+                <ReactTimeAgo date={new Date(`${post.createdAt}`)} locale="fr-FR" verbose="date" />
                 <p>{post.body}</p>
                 <img src={post.content} alt="illustration du post" />
                 <ul className="contents">

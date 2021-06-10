@@ -44,10 +44,12 @@ button{
     h4{
         font-weight: bold;
         font-size: 1.2rem;
+        color: black;
        
     }
     a{
         font-size: 1.1rem;
+        text-decoration: none;
     }
     span{
         font-weight: light;
